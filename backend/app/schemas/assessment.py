@@ -1,11 +1,10 @@
-"""Assessment schemas."""
 from pydantic import BaseModel
 from datetime import datetime
 
 
 class AssessmentBase(BaseModel):
-    title: str
     student_id: int
+    question_id: int
 
 
 class AssessmentCreate(AssessmentBase):
@@ -14,7 +13,7 @@ class AssessmentCreate(AssessmentBase):
 
 class AssessmentResponse(AssessmentBase):
     id: int
-    completed_at: datetime
+    answered_at: datetime
 
     class Config:
         from_attributes = True

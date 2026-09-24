@@ -1,11 +1,9 @@
-"""Answer schemas."""
 from pydantic import BaseModel
 
 
 class AnswerBase(BaseModel):
-    question_id: int
     assessment_id: int
-    selected_option: str
+    text: str
     is_correct: bool = False
 
 

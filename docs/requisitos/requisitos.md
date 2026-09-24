@@ -2,31 +2,34 @@
 
 ## Requisitos Funcionais
 
-### RF01 - Cadastro de Estudantes
-- O sistema deve permitir cadastro de novos estudantes
-- O sistema deve validar email único
+### RF01 - Cadastrar aluno
+O sistema deve permitir o cadastro de alunos com nome e email.
 
-### RF02 - Realizar Diagnóstico
-- O sistema deve permitir que estudantes realizem avaliações diagnósticas
-- O sistema deve registrar respostas e calcular acertos
+### RF02 - Listar alunos
+O sistema deve listar todos os alunos cadastrados.
 
-### RF03 - Visualizar Desempenho
-- O sistema deve exibir dashboard com métricas de desempenho
-- O sistema deve mostrar evolução ao longo do tempo
+### RF03 - Cadastrar questão
+O sistema deve permitir o cadastro de questões com texto, matéria e dificuldade.
 
-### RF04 - Gerar Recomendações
-- O sistema deve identificar áreas fracas do estudante
-- O sistema deve sugerir tópicos para estudo
+### RF04 - Listar questões
+O sistema deve listar todas as questões cadastradas.
+
+### RF05 - Registrar avaliação
+O sistema deve permitir registrar uma avaliação (aluno + questão + resposta).
+
+### RF06 - Visualizar desempenho
+O sistema deve mostrar o desempenho do aluno (acertos/erros).
 
 ## Requisitos Não Funcionais
 
-### RNF01 - Performance
-- API deve responder em até 500ms
-- Dashboard deve carregar em até 2 segundos
+### RNF01 - Backend em FastAPI
+O backend deve ser desenvolvido em Python com FastAPI.
 
-### RNF02 - Segurança
-- Senhas devem ser hasheadas com bcrypt
-- API deve usar autenticação JWT
+### RNF02 - Frontend em Streamlit
+O frontend deve ser desenvolvido em Python com Streamlit.
 
-### RNF03 - Escalabilidade
-- Sistema deve suportar até 1000 usuários simultâneos
+### RNF03 - Banco de dados PostgreSQL
+O sistema deve usar PostgreSQL como banco de dados.
+
+### RNF04 - Docker
+O sistema deve ser containerizado com Docker.

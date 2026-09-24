@@ -1,11 +1,10 @@
-"""Question schemas."""
 from pydantic import BaseModel
 
 
 class QuestionBase(BaseModel):
     text: str
     subject: str
-    grade_level: int
+    difficulty: str
 
 
 class QuestionCreate(QuestionBase):

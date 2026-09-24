@@ -1,25 +1,38 @@
 # MVP - Zaria
 
-## Visão Geral
+## Objetivo
 
-O Zaria é uma plataforma de diagnóstico educacional que ajuda estudantes a identificar lacunas de aprendizado e acompanhar seu desempenho.
+Criar uma plataforma de diagnóstico educacional que ajude alunos a identificar pontos fortes e fracos em diferentes matérias.
 
-## Funcionalidades Principais
+## Funcionalidades do MVP
 
-1. **Diagnóstico por Matéria**: Avaliações para identificar pontos fracos
-2. **Dashboard de Desempenho**: Visualização clara do progresso
-3. **Recomendações Personalizadas**: Sugestões de tópicos para estudar
-4. **Acompanhamento Contínuo**: Histórico de avaliações e evolução
+1. **Cadastro de alunos**
+   - Nome e email
+   - Visualização de lista de alunos
 
-## Critérios de Sucesso
+2. **Banco de questões**
+   - Questões por matéria (Matemática, Português, Ciências, etc.)
+   - Níveis de dificuldade (fácil, médio, difícil)
 
-- Estudante consegue realizar diagnóstico em até 5 minutos
-- Dashboard mostra claramente áreas de melhoria
-- Sistema recomenda tópicos relevantes baseados no desempenho
+3. **Avaliações**
+   - Registrar respostas do aluno
+   - Marcar se acertou ou errou
 
-## Roadmap
+4. **Dashboard básico**
+   - Total de alunos
+   - Total de questões
+   - Total de avaliações realizadas
 
-- [ ] MVP funcional com 3 matérias
-- [ ] Dashboard básico
-- [ ] Sistema de recomendação simples
-- [ ] Autenticação de usuários
+## Fora do escopo do MVP
+
+- Autenticação de usuários
+- Gráficos avançados
+- Recomendações inteligentes
+- Importação em massa de questões
+
+## Critérios de aceite
+
+- [ ] Aluno pode ser cadastrado
+- [ ] Questão pode ser cadastrada
+- [ ] Avaliação pode ser registrada
+- [ ] Dashboard mostra contadores básicos

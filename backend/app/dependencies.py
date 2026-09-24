@@ -1,13 +1,10 @@
-"""Common dependencies for dependency injection."""
-from typing import Annotated
-from fastapi import Depends
+from fastapi import Depends, HTTPException, status
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+security = HTTPBearer()
 
 
-async def get_current_user(token: Annotated[str, Depends()]):
-    """Get current authenticated user from token."""
-    return {"user_id": 1, "username": "demo"}
-
-
-async def get_db_session():
-    """Get database session."""
-    pass
+async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> dict:
+    token = credentials.credentials
+    # TODO: implementar validação do token
+    return {"sub": "user_id", "token": token}

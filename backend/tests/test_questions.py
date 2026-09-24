@@ -1,8 +1,18 @@
-"""Tests for questions endpoints."""
 from fastapi.testclient import TestClient
 from backend.app.main import app
 
 client = TestClient(app)
+
+
+def test_create_question():
+    response = client.post(
+        "/questions/",
+        json={"text": "Qual a capital do Brasil?", "subject": "Geografia", "difficulty": "fácil"}
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["text"] == "Qual a capital do Brasil?"
+    assert data["subject"] == "Geografia"
 
 
 def test_list_questions():
@@ -11,9 +21,15 @@ def test_list_questions():
     assert isinstance(response.json(), list)
 
 
-def test_create_question():
-    payload = {"text": "What is 2+2?", "subject": "Math", "grade_level": 5}
-    response = client.post("/questions/", json=payload)
+def test_get_question():
+    # Primeiro cria uma questão
+    create_response = client.post(
+        "/questions/",
+        json={"text": "Quanto é 2+2?", "subject": "Matemática", "difficulty": "fácil"}
+    )
+    question_id = create_response.json()["id"]
+
+    # Depois busca
+    response = client.get(f"/questions/{question_id}")
     assert response.status_code == 200
-    data = response.json()
-    assert data["text"] == "What is 2+2?"
+    assert response.json()["id"] == question_id

@@ -5,16 +5,16 @@ __pycache__/
 *.so
 .Python
 venv/
-ENV/
 env/
-.venv
+.venv/
+env.bak/
+venv.bak/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
-*~
 
 # Environment
 .env
@@ -22,23 +22,17 @@ env/
 
 # Database
 *.db
-*.sqlite
 *.sqlite3
 
 # Logs
 *.log
-logs/
+
+# Backups
+backups/
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Build
-dist/
-build/
-*.egg-info/
+# Streamlit
+.streamlit/secrets.toml

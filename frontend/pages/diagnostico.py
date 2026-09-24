@@ -1,7 +1,12 @@
-"""Diagnosis page."""
 import streamlit as st
 
-st.set_page_config(page_title="Diagnóstico", page_icon="🔍")
-st.title("🔍 Diagnóstico")
-st.write("Avaliação diagnóstica por matéria.")
-st.button("Iniciar Diagnóstico")
+
+def show():
+    st.header("Diagnóstico")
+    st.write("Avalie o conhecimento do aluno em diferentes matérias.")
+
+    # TODO: adicionar seleção de aluno
+    # TODO: adicionar lista de questões
+    # TODO: adicionar formulário de resposta
+
+    st.info("Em breve: seleção de aluno, questões por matéria e registro de respostas.")

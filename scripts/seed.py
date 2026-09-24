@@ -1,40 +1,51 @@
-"""Seed script to populate database."""
-import asyncio
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+#!/usr/bin/env python3
+"""Script para popular o banco com dados iniciais."""
+
+import sys
+from pathlib import Path
+
+# Adiciona o backend ao path
+sys.path.insert(0, str(Path(__file__).parent.parent / "backend"))
+
+from app.database.connection import engine
+from app.database.base import Base
+from app.models.student import Student
+from app.models.question import Question
+from app.models.assessment import Assessment
+from app.models.answer import Answer
 from sqlalchemy.orm import sessionmaker
-from backend.app.config import settings
-from backend.app.database.base import Base
-from backend.app.models.student import Student
-from backend.app.models.question import Question
+
+Session = sessionmaker(bind=engine)
 
 
-async def seed():
-    engine = create_async_engine(settings.DATABASE_URL, echo=True)
-    
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    
-    AsyncSessionLocal = sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
-    
-    async with AsyncSessionLocal() as session:
-        students = [
-            Student(name="Ana Silva", email="ana@example.com"),
-            Student(name="Bruno Santos", email="bruno@example.com"),
-            Student(name="Carla Oliveira", email="carla@example.com"),
-        ]
-        session.add_all(students)
-        
-        questions = [
-            Question(text="Quanto é 2 + 2?", subject="Matemática", grade_level=5),
-            Question(text="Qual a capital do Brasil?", subject="Geografia", grade_level=5),
-            Question(text="Quem descobriu o Brasil?", subject="História", grade_level=5),
-            Question(text="Qual o plural de 'cão'?", subject="Português", grade_level=5),
-        ]
-        session.add_all(questions)
-        
-        await session.commit()
-        print("✅ Database seeded successfully!")
+def run_seeds():
+    # Cria as tabelas
+    Base.metadata.create_all(engine)
+
+    db = Session()
+
+    # Seeds de alunos
+    students = [
+        Student(name="Ana Silva", email="ana@example.com"),
+        Student(name="Bruno Santos", email="bruno@example.com"),
+        Student(name="Carla Oliveira", email="carla@example.com"),
+    ]
+    db.add_all(students)
+
+    # Seeds de questões
+    questions = [
+        Question(text="Qual a capital do Brasil?", subject="Geografia", difficulty="fácil"),
+        Question(text="Quanto é 2 + 2?", subject="Matemática", difficulty="fácil"),
+        Question(text="Quem descobriu o Brasil?", subject="História", difficulty="médio"),
+        Question(text="Qual a fórmula da água?", subject="Química", difficulty="fácil"),
+        Question(text="Qual o planeta mais próximo do Sol?", subject="Astronomia", difficulty="médio"),
+    ]
+    db.add_all(questions)
+
+    db.commit()
+    print("Seeds aplicadas com sucesso!")
+    db.close()
 
 
 if __name__ == "__main__":
-    asyncio.run(seed())
+    run_seeds()

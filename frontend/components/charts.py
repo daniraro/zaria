@@ -1,11 +1,14 @@
-"""Chart components."""
 import streamlit as st
 import pandas as pd
 
 
-def performance_chart(data: pd.DataFrame):
-    st.line_chart(data)
+def bar_chart(data: pd.DataFrame, x: str, y: str, title: str = None):
+    st.bar_chart(data.set_index(x)[y])
+    if title:
+        st.caption(title)
 
 
-def subject_breakdown_chart(data: pd.DataFrame):
-    st.bar_chart(data)
+def line_chart(data: pd.DataFrame, x: str, y: str, title: str = None):
+    st.line_chart(data.set_index(x)[y])
+    if title:
+        st.caption(title)

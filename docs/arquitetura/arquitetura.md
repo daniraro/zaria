@@ -2,36 +2,30 @@
 
 ## Visão Geral
 
-O Zaria utiliza uma arquitetura baseada em microsserviços com separação clara entre backend e frontend.
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│  Frontend   │────▶│   Backend    │────▶│  Database   │
+│  Streamlit  │     │   FastAPI    │     │ PostgreSQL  │
+└─────────────┘     └──────────────┘     └─────────────┘
+```
 
 ## Componentes
 
-### Backend
-- **Framework**: FastAPI (Python)
-- **Banco de Dados**: PostgreSQL com SQLAlchemy Async
-- **Autenticação**: JWT
-- **Estrutura**: MVC (Models, Routes, Services, Repositories)
+### Frontend (Streamlit)
+- Interface web para usuários
+- Consome API do backend
+- Páginas: Dashboard, Diagnóstico, Desempenho, Perfil
 
-### Frontend
-- **Framework**: Streamlit (Python)
-- **Comunicação**: API REST
-- **Componentes**: Cards, Charts, Tables
+### Backend (FastAPI)
+- API REST
+- Autenticação JWT (futuro)
+- Regras de negócio
+- Repositórios de dados
 
-### Banco de Dados
-- **Tabelas Principais**: students, questions, assessments, answers
-- **ORM**: SQLAlchemy
+### Database (PostgreSQL)
+- Armazenamento de alunos, questões, avaliações e respostas
+- Migrations e seeds
 
-## Fluxo de Dados
+## Estrutura de Diretórios
 
-1. Frontend faz requisições para API do Backend
-2. Backend processa e interage com Banco de Dados
-3. Respostas são retornadas como JSON
-4. Frontend renderiza dados para o usuário
-
-## Tecnologias
-
-- Python 3.11+
-- FastAPI
-- SQLAlchemy Async
-- Streamlit
-- PostgreSQL
+Ver README.md na raiz do projeto.

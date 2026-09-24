@@ -1,42 +1,36 @@
 # Modelo de Dados
 
-## Entidades Principais
+## Entidades
 
-### Student (Estudante)
-- `id`: Integer (PK)
-- `name`: String
-- `email`: String (unique)
-- `created_at`: DateTime
-- `updated_at`: DateTime
+### students
+- id (PK)
+- name
+- email (unique)
+- created_at
+- updated_at
 
-### Question (Questão)
-- `id`: Integer (PK)
-- `text`: Text
-- `subject`: String
-- `grade_level`: Integer
+### questions
+- id (PK)
+- text
+- subject
+- difficulty
 
-### Assessment (Avaliação)
-- `id`: Integer (PK)
-- `student_id`: Integer (FK -> Student)
-- `title`: String
-- `completed_at`: DateTime
+### assessments
+- id (PK)
+- student_id (FK → students.id)
+- question_id (FK → questions.id)
+- answered_at
 
-### Answer (Resposta)
-- `id`: Integer (PK)
-- `question_id`: Integer (FK -> Question)
-- `assessment_id`: Integer (FK -> Assessment)
-- `selected_option`: String
-- `is_correct`: Boolean
+### answers
+- id (PK)
+- assessment_id (FK → assessments.id)
+- text
+- is_correct
 
-## Relacionamentos
+## Diagrama ER
 
-- Student (1) ── (N) Assessment
-- Assessment (1) ── (N) Answer
-- Question (1) ── (N) Answer
-
-## Índices
-
-- `students.email`: unique index
-- `questions.subject`: index
-- `assessments.student_id`: index
-- `answers.assessment_id`: index
+```
+students 1──N assessments N──1 questions
+                  │
+                  1──N answers
+```

@@ -1,17 +1,39 @@
-"""Question repository."""
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-from backend.app.models.question import Question
+from sqlalchemy.orm import Session
+from ..models.question import Question
+from ..schemas.question import QuestionCreate
 
 
 class QuestionRepository:
-    def __init__(self, session: AsyncSession):
-        self.session = session
+    def __init__(self, db: Session):
+        self.db = db
 
-    async def get_by_id(self, question_id: int) -> Question | None:
-        result = await self.session.execute(select(Question).where(Question.id == question_id))
-        return result.scalar_one_or_none()
+    def create(self, question: QuestionCreate) -> Question:
+        db_question = Question(**question.model_dump())
+        self.db.add(db_question)
+        self.db.commit()
+        self.db.refresh(db_question)
+        return db_question
 
-    async def get_by_subject(self, subject: str) -> list[Question]:
-        result = await self.session.execute(select(Question).where(Question.subject == subject))
-        return result.scalars().all()
+    def get_by_id(self, question_id: int) -> Question | None:
+        return self.db.query(Question).filter(Question.id == question_id).first()
+
+    def list_all(self) -> list:
+        return self.db.query(Question).all()
+
+    def update(self, question_id: int, data: dict) -> Question | None:
+        question = self.get_by_id(question_id)
+        if not question:
+            return None
+        for key, value in data.items():
+            setattr(question, key, value)
+        self.db.commit()
+        self.db.refresh(question)
+        return question
+
+    def delete(self, question_id: int) -> bool:
+        question = self.get_by_id(question_id)
+        if not question:
+            return False
+        self.db.delete(question)
+        self.db.commit()
+        return True

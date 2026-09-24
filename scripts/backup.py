@@ -1,21 +1,28 @@
-"""Backup script for database."""
-import asyncio
+#!/usr/bin/env python3
+"""Script para backup do banco de dados."""
+
 import subprocess
 from datetime import datetime
-from backend.app.config import settings
+from pathlib import Path
+
+BACKUP_DIR = Path(__file__).parent.parent / "backups"
+BACKUP_DIR.mkdir(exist_ok=True)
 
 
-async def create_backup():
+def run_backup(db_name: str, db_user: str):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_file = f"backup_zaria_{timestamp}.sql"
-    cmd = f"pg_dump {settings.DATABASE_URL} > {backup_file}"
-    
-    try:
-        subprocess.run(cmd, shell=True, check=True)
-        print(f"✅ Backup created: {backup_file}")
-    except subprocess.CalledProcessError as e:
-        print(f"❌ Backup failed: {e}")
+    backup_file = BACKUP_DIR / f"{db_name}_{timestamp}.sql"
+
+    cmd = [
+        "pg_dump",
+        "-U", db_user,
+        "-d", db_name,
+        "-f", str(backup_file)
+    ]
+
+    subprocess.run(cmd, check=True)
+    print(f"Backup realizado: {backup_file}")
 
 
 if __name__ == "__main__":
-    asyncio.run(create_backup())
+    run_backup("zaria", "postgres")

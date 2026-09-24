@@ -1,15 +1,12 @@
-"""Card components."""
 import streamlit as st
 
 
 def metric_card(label: str, value: str, delta: str = None):
-    if delta:
+    col = st.columns(1)[0]
+    with col:
         st.metric(label=label, value=value, delta=delta)
-    else:
-        st.metric(label=label, value=value)
 
 
 def info_card(title: str, content: str):
-    with st.container():
-        st.subheader(title)
+    with st.expander(title):
         st.write(content)

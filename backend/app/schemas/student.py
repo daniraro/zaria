@@ -1,4 +1,3 @@
-"""Student schemas."""
 from pydantic import BaseModel, EmailStr
 from datetime import datetime
 
@@ -15,7 +14,7 @@ class StudentCreate(StudentBase):
 class StudentResponse(StudentBase):
     id: int
     created_at: datetime
-    updated_at: datetime
+    updated_at: datetime | None = None
 
     class Config:
         from_attributes = True

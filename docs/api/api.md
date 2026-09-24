@@ -1,63 +1,86 @@
 # API Documentation
 
-## Base URL
-
-```
-http://localhost:8000
-```
-
 ## Endpoints
 
 ### Students
 
-#### GET /students/
-Lista todos os estudantes.
+#### POST /students
+Cadastra um novo aluno.
 
-**Resposta**: `200 OK`
+**Body:**
 ```json
-[{"id": 1, "name": "Ana Silva", "email": "ana@example.com"}]
+{
+  "name": "Ana Silva",
+  "email": "ana@example.com"
+}
 ```
 
-#### POST /students/
-Cria um novo estudante.
-
-**Requisição**:
+**Response:**
 ```json
-{"name": "Bruno Santos", "email": "bruno@example.com"}
+{
+  "id": 1,
+  "name": "Ana Silva",
+  "email": "ana@example.com",
+  "created_at": "2026-09-24T15:00:00",
+  "updated_at": null
+}
 ```
 
-**Resposta**: `200 OK`
-```json
-{"id": 2, "name": "Bruno Santos", "email": "bruno@example.com"}
-```
+#### GET /students
+Lista todos os alunos.
+
+#### GET /students/{id}
+Busca um aluno específico.
 
 ### Questions
 
-#### GET /questions/
+#### POST /questions
+Cadastra uma nova questão.
+
+**Body:**
+```json
+{
+  "text": "Qual a capital do Brasil?",
+  "subject": "Geografia",
+  "difficulty": "fácil"
+}
+```
+
+#### GET /questions
 Lista todas as questões.
 
-#### POST /questions/
-Cria uma nova questão.
+#### GET /questions/{id}
+Busca uma questão específica.
 
 ### Assessments
 
-#### GET /assessments/
-Lista todas as avaliações.
+#### POST /assessments
+Registra uma nova avaliação.
 
-#### POST /assessments/
-Cria uma nova avaliação.
+**Body:**
+```json
+{
+  "student_id": 1,
+  "question_id": 5
+}
+```
+
+#### GET /assessments
+Lista todas as avaliações.
 
 ### Answers
 
-#### GET /answers/
+#### POST /answers
+Registra uma resposta.
+
+**Body:**
+```json
+{
+  "assessment_id": 1,
+  "text": "Brasília",
+  "is_correct": true
+}
+```
+
+#### GET /answers
 Lista todas as respostas.
-
-#### POST /answers/
-Cria uma nova resposta.
-
-## Autenticação
-
-Endpoints protegidos requerem header:
-```
-Authorization: Bearer <token>
-```
