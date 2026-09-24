@@ -6,20 +6,104 @@ Plataforma de diagnóstico educacional para acompanhamento de desempenho de alun
 
 ```
 zaria/
-├── backend/          # API FastAPI
-│   ├── app/          # Código da aplicação
-│   ├── tests/        # Testes do backend
-│   └── requirements.txt
-├── frontend/         # Interface Streamlit
-│   ├── pages/        # Páginas da aplicação
-│   ├── components/   # Componentes reutilizáveis
-│   ├── services/     # Serviços de API
-│   └── requirements.txt
-├── database/         # Scripts e seeds do banco
-├── docs/             # Documentação do projeto
-├── scripts/          # Scripts utilitários
-├── docker/           # Dockerfiles
-└── tests/            # Testes de integração
+│
+├── backend/
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── config.py
+│   │   ├── dependencies.py
+│   │   ├── core/
+│   │   │   ├── security.py
+│   │   │   └── auth.py
+│   │   ├── database/
+│   │   │   ├── connection.py
+│   │   │   ├── base.py
+│   │   │   └── session.py
+│   │   ├── models/
+│   │   │   ├── student.py
+│   │   │   ├── question.py
+│   │   │   ├── assessment.py
+│   │   │   ├── answer.py
+│   │   │   └── ...
+│   │   ├── schemas/
+│   │   │   ├── student.py
+│   │   │   ├── question.py
+│   │   │   ├── assessment.py
+│   │   │   ├── answer.py
+│   │   │   └── ...
+│   │   ├── routes/
+│   │   │   ├── students.py
+│   │   │   ├── questions.py
+│   │   │   ├── assessments.py
+│   │   │   ├── answers.py
+│   │   │   └── ...
+│   │   ├── services/
+│   │   │   ├── performance.py
+│   │   │   ├── analytics.py
+│   │   │   ├── diagnosis.py
+│   │   │   └── ...
+│   │   └── repositories/
+│   │       ├── student.py
+│   │       ├── question.py
+│   │       └── ...
+│   ├── tests/
+│   │   ├── test_students.py
+│   │   ├── test_questions.py
+│   │   └── ...
+│   ├── requirements.txt
+│   └── .venv/
+│
+├── frontend/
+│   ├── app.py
+│   ├── pages/
+│   │   ├── dashboard.py
+│   │   ├── diagnostico.py
+│   │   ├── desempenho.py
+│   │   └── perfil.py
+│   ├── components/
+│   │   ├── cards.py
+│   │   ├── charts.py
+│   │   └── tables.py
+│   ├── services/
+│   │   └── api.py
+│   └── assets/
+│       ├── images/
+│       └── styles/
+│
+├── database/
+│   ├── seeds/
+│   └── README.md
+│
+├── docs/
+│   ├── produto/
+│   │   └── mvp.md
+│   ├── requisitos/
+│   │   └── requisitos.md
+│   ├── arquitetura/
+│   │   └── arquitetura.md
+│   ├── banco/
+│   │   └── modelo-dados.md
+│   └── api/
+│       └── api.md
+│
+├── scripts/
+│   ├── seed.py
+│   ├── import_questions.py
+│   └── backup.py
+│
+├── docker/
+│   ├── backend/
+│   │   └── Dockerfile
+│   └── frontend/
+│       └── Dockerfile
+│
+├── tests/
+│   └── integration/
+│
+├── .gitignore
+├── .env.example
+├── docker-compose.yml
+└── README.md
 ```
 
 ## Tecnologias
@@ -46,8 +130,8 @@ Acesse:
 1. **Backend:**
    ```bash
    cd backend
-   python -m venv venv
-   source venv/bin/activate  # ou venv\Scripts\activate no Windows
+   python -m venv .venv
+   source .venv/bin/activate  # ou .venv\Scripts\activate no Windows
    pip install -r requirements.txt
    uvicorn app.main:app --reload
    ```
