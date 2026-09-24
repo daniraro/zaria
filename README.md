@@ -1,4 +1,4 @@
-# Zaria
+# Zária
 
 Plataforma de diagnóstico educacional para acompanhamento de desempenho de alunos.
 
